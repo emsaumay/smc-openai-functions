@@ -1,0 +1,172 @@
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-VYgpXBO+pGfek+K5jSNQmeDL68a2GJf4VY19g+PWNi0rG19Zc3kg8AzEIKBD4BCQnS8y1j1+JdwsUkm3w1WNPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>ChatBot</title>
+    <style>
+        body {
+            padding: 20px;
+            font-family: "Arial", sans-serif;
+            background-color: #f8f9fa;
+            background-image: linear-gradient(to bottom right, #FDC830, #F37335);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #666666;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid #cccccc;
+            padding: 8px;
+            font-family: "Arial", sans-serif;
+            color: #333333;
+            background-color: #ffffff;
+        }
+
+        .btn-primary {
+            background-color: #ff6f00;
+            border-color: #ff6f00;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff8f00;
+            border-color: #ff8f00;
+        }
+
+        #output {
+            display: none;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #output p {
+            margin: 0;
+            font-size: 18px;
+            font-family: "Arial", sans-serif;
+            color: #333333;
+        }
+
+        /* Additional Styles */
+
+        .container {
+            max-width: 600px;
+        }
+
+        .container::before,
+        .container::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .container form {
+            margin: 0 auto;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://bs-uploads.toptal.io/blackfish-uploads/components/seo/content/og_image_file/og_image/1102858/chatbot-ux-design-947150b6d0e50becc21ef8c828f22acb.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box i {
+            font-size: 48px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>ChatBot</h1>
+            <div class="icon-box">
+                <i class="fas fa-user"></i>
+                <i class="fas fa-robot"></i>
+            </div>
+            <form action="/form" method="post">
+                <div class="form-group">
+                    <label for="prompt">Enter Query</label>
+                    <textarea class="form-control" id="prompt" name="input_value" rows="5" required>{{ prompt }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="output">
+                {% if output %}
+                <p>Query: {{question}}<br>Output:<br>{% for o in output %} {% for i in o %} {{i}} <br> {%endfor%} {%endfor%}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="bg-image"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+        integrity="sha512-OVUPWanbWECj7+SNgAT1JIiZD2pCX4gqdfA9Nc9ekM6lqW1mVGIZgCnBGrHs0OjUv5zypDGvK23vp9cJPC8+GA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Display output field after receiving response
+        {% if output %}
+        document.getElementById("output").style.display = "block";
+        {% endif %}
+    </script>
+</body>
+
+</html> --
+
